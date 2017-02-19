@@ -1,0 +1,20 @@
+{
+  "name": "bungee-girl-server",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Noah Passalacqua",
+  "license": "ISC",
+  "dependencies": {
+    "babel-runtime": "^6.23.0",
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "firebase-admin": "^4.1.1",
+    "lodash": "^4.17.4",
+    "onesignal": "^0.1.2"
+  }
+}
