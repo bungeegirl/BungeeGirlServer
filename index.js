@@ -39,7 +39,7 @@ app.post('/notification/followers/:userId', (req, res) => {
 
 
 
-app.listen(3000, _ => {
+app.listen(process.env.PORT, _ => {
   console.log('Server started.')
 
   admin.initializeApp({
