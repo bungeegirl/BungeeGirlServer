@@ -21,6 +21,8 @@ app.post('/notification/followers/:userId', (req, res) => {
   let db = admin.database()
 
   db.ref(`users-followers/${userId}`)
+    .orderByValue()
+    .equalTo(true)
     .once('value', followersSnap => {
       _.each(_.keys(followersSnap.val()), (id) => {
         db.ref(`users/${id}`)
