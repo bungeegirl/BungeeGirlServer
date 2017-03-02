@@ -24,18 +24,23 @@ app.post('/notification/followers/:userId', (req, res) => {
     .orderByValue()
     .equalTo(true)
     .once('value', followersSnap => {
+      let promises = []
       _.each(_.keys(followersSnap.val()), (id) => {
-        db.ref(`users/${id}`)
-          .on('value', userSnap => {
-            let { pushToken } = userSnap.val()
-            oneSignal.createNotification(message, {
-              type,
-              userId
-            }, [pushToken])
-
-            res.json({success: true})
-          })
+        promises.push(
+          db.ref(`users/${id}`)
+            .once('value', userSnap => {
+              let { pushToken } = userSnap.val()
+              oneSignal.createNotification(message, {
+                type,
+                userId
+              }, [pushToken])
+            })
+        )
       })
+      Promise.all(promises)
+        .then( _ => {
+          res.json({success: true})
+        })
     })
 })
 
